@@ -11,6 +11,8 @@ const pieces = [
     ["♖", "♘", "♗", "♕", "♔", "♗", "♘", "♖"]
 ];
 
+let selectedSquare = null;
+
 for (let row = 0; row < 8; row++) {
 
     for (let col = 0; col < 8; col++) {
@@ -26,6 +28,7 @@ for (let row = 0; row < 8; row++) {
         }
 
         const piece = document.createElement("span");
+
         piece.textContent = pieces[row][col];
 
         if (row < 2) {
@@ -37,6 +40,17 @@ for (let row = 0; row < 8; row++) {
         }
 
         square.appendChild(piece);
+
+        square.addEventListener("click", function () {
+
+            if (selectedSquare) {
+                selectedSquare.classList.remove("selected");
+            }
+
+            selectedSquare = square;
+
+            square.classList.add("selected");
+        });
 
         board.appendChild(square);
     }
