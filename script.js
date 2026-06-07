@@ -6,12 +6,12 @@ for (let row = 0; row < 8; row++) {
 
         const square = document.createElement("div");
         
-        square.classicList.add("square");
+        square.classList.add("square");
 
         if ((row + col) % 2 === 0) {
-            square.classicList.add("white");
+            square.classList.add("white");
         } else {
-            square.classicList.add("blue");
+            square.classList.add("blue");
         }
 
         board.appendChild(square);
