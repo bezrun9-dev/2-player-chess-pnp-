@@ -23,7 +23,9 @@ body {
 
 h1 {
     color: #4a7cff;
+
     margin-bottom: 30px;
+
     font-size: 48px;
 }
 
@@ -69,6 +71,12 @@ h1 {
 
 .white-piece {
     color: white;
+}
+
+
+.selected {
+    outline: 4px solid yellow;
+    outline-offset: -4px;
 }
 
 
