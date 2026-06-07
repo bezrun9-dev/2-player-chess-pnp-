@@ -25,16 +25,18 @@ for (let row = 0; row < 8; row++) {
             square.classList.add("blue");
         }
 
-        square.textContent = pieces[row][col];
+        const piece = document.createElement("span");
+        piece.textContent = pieces[row][col];
 
-        
         if (row < 2) {
-            square.style.color = "black";
+            piece.classList.add("black-piece");
         }
 
         if (row > 5) {
-            square.style.color = "white";
+            piece.classList.add("white-piece");
         }
+
+        square.appendChild(piece);
 
         board.appendChild(square);
     }
