@@ -1,6 +1,6 @@
 const board = document.getElementById("board");
 
-const pieces = [
+let pieces = [
     ["♜", "♞", "♝", "♛", "♚", "♝", "♞", "♜"],
     ["♟", "♟", "♟", "♟", "♟", "♟", "♟", "♟"],
     ["", "", "", "", "", "", "", ""],
@@ -11,47 +11,100 @@ const pieces = [
     ["♖", "♘", "♗", "♕", "♔", "♗", "♘", "♖"]
 ];
 
-let selectedSquare = null;
+let selectedRow = null;
+let selectedCol = null;
 
-for (let row = 0; row < 8; row++) {
+let currentTurn = "white";
 
-    for (let col = 0; col < 8; col++) {
+const whitePieces = ["♙", "♖", "♘", "♗", "♕", "♔"];
+const blackPieces = ["♟", "♜", "♞", "♝", "♛", "♚"];
 
-        const square = document.createElement("div");
+function drawBoard() {
 
-        square.classList.add("square");
+    board.innerHTML = "";
 
-        if ((row + col) % 2 === 0) {
-            square.classList.add("white");
-        } else {
-            square.classList.add("blue");
-        }
+    for (let row = 0; row < 8; row++) {
 
-        const piece = document.createElement("span");
+        for (let col = 0; col < 8; col++) {
 
-        piece.textContent = pieces[row][col];
+            const square = document.createElement("div");
 
-        if (row < 2) {
-            piece.classList.add("black-piece");
-        }
+            square.classList.add("square");
 
-        if (row > 5) {
-            piece.classList.add("white-piece");
-        }
-
-        square.appendChild(piece);
-
-        square.addEventListener("click", function () {
-
-            if (selectedSquare) {
-                selectedSquare.classList.remove("selected");
+            if ((row + col) % 2 === 0) {
+                square.classList.add("white");
+            } else {
+                square.classList.add("blue");
             }
 
-            selectedSquare = square;
+            const piece = document.createElement("span");
 
-            square.classList.add("selected");
-        });
+            piece.textContent = pieces[row][col];
 
-        board.appendChild(square);
+            if (blackPieces.includes(pieces[row][col])) {
+                piece.classList.add("black-piece");
+            }
+
+            if (whitePieces.includes(pieces[row][col])) {
+                piece.classList.add("white-piece");
+            }
+
+            square.appendChild(piece);
+
+            if (row === selectedRow && col === selectedCol) {
+                square.classList.add("selected");
+            }
+
+            square.addEventListener("click", function () {
+
+                const clickedPiece = pieces[row][col];
+
+                if (selectedRow === null) {
+
+                    if (clickedPiece === "") return;
+
+                    if (
+                        currentTurn === "white" &&
+                        !whitePieces.includes(clickedPiece)
+                    ) {
+                        return;
+                    }
+
+                    if (
+                        currentTurn === "black" &&
+                        !blackPieces.includes(clickedPiece)
+                    ) {
+                        return;
+                    }
+
+                    selectedRow = row;
+                    selectedCol = col;
+
+                    drawBoard();
+
+                } else {
+
+                    pieces[row][col] =
+                        pieces[selectedRow][selectedCol];
+
+                    pieces[selectedRow][selectedCol] = "";
+
+                    selectedRow = null;
+                    selectedCol = null;
+
+                    if (currentTurn === "white") {
+                        currentTurn = "black";
+                    } else {
+                        currentTurn = "white";
+                    }
+
+                    drawBoard();
+                }
+            });
+
+            board.appendChild(square);
+        }
     }
 }
+
+drawBoard();
