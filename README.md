@@ -1,2 +1,3 @@
 # 2-player-chess-pnp-
-a 2 player pass and play chess game.
+This project is aimed at making a 2 player chess game, that can be played on one device with pass and play (pnp), this project is not finished, so far I have made the board, the pieces, the turns and movement. But I still havent added legal moving and promotion, aswell as the board turning around after each turn.
+to test this go to the demo link https://bezrun9-dev.github.io/2-player-chess-pnp-/. I am more on the beginner side of making games, I used AI to learn how to code this as its my first time, hence why it looks kinda basic. This is a first prototype, I will update this project hopefully. 
