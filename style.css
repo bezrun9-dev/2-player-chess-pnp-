@@ -64,15 +64,21 @@ h1 {
     background-color: #4a7cff;
 }
 
-
 .black-piece {
     color: black;
+    font-weight: bold;
 }
 
 .white-piece {
     color: white;
-}
+    font-weight: bold;
 
+    text-shadow:
+        -1px -1px 0 black,
+         1px -1px 0 black,
+        -1px  1px 0 black,
+         1px  1px 0 black;
+}
 
 .selected {
     outline: 4px solid yellow;
